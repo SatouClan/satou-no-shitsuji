@@ -4,7 +4,7 @@
   "description": "I am Satou's butler.",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "rm -rf dist && tsc && node -r dotenv/config ./dist/index.js",
+    "build": "rm -rf dist && tsc",
     "start": "node -r dotenv/config ./dist/index.js",
     "dev": "nodemon"
   },
