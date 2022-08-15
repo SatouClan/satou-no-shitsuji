@@ -1,0 +1,34 @@
+{
+  "name": "satou_no_shitsuji",
+  "version": "1.0.0",
+  "description": "I am Satou's butler.",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "start": "NODE_ENV=production node -r dotenv/config ./dist/index.js",
+    "dev": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/satoufukumi/satou_no_shitsuji.git"
+  },
+  "author": "Fukumi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/satoufukumi/satou_no_shitsuji/issues"
+  },
+  "homepage": "https://github.com/satoufukumi/satou_no_shitsuji#readme",
+  "devDependencies": {
+    "@types/module-alias": "^2.0.1",
+    "@types/node": "^18.7.3",
+    "nodemon": "^2.0.19",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.1.0",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "discord.js": "^14.2.0",
+    "dotenv": "^16.0.1",
+    "mathjs": "^11.0.1"
+  }
+}
