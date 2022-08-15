@@ -6,7 +6,7 @@ import { REST } from '@discordjs/rest'
 import schemas from './schemas'
 
 /** env */
-import { CLIENT_ID, TOKEN } from '@/constants/config'
+import { CLIENT_ID, TOKEN } from './../constants/config'
 
 
 export default function deploy(): void {
