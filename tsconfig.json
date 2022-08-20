@@ -1,9 +1,4 @@
 {
-  "ts-node": {
-    "require": [
-      "tsconfig-paths/register"
-    ]
-  },
   "compilerOptions": {
     "module": "CommonJS",
     "esModuleInterop": true,
@@ -12,7 +7,7 @@
     "moduleResolution": "Node",
     "strict": true,
     "sourceMap": false,
-    "outDir": "api",
+    "outDir": "dist",
     "baseUrl": "src",
     "paths": {
       "@/*": [

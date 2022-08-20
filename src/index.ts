@@ -5,7 +5,7 @@ import express from 'express'
 import { ActivityType, Client, GatewayIntentBits } from "discord.js"
 
 /** environment variables */
-import { TOKEN } from './constants/config'
+import { TOKEN, PORT } from './constants/config'
 
 /** commands section */
 import { run } from './commands'
@@ -42,12 +42,9 @@ client.once("ready", (instance): void => {
 })
 
 
-/** login */
-client.login(TOKEN)
-
-
-/** start the application */
+/** express app */
 const app = express()
+app.use(express.json())
 
 app
     .route('/')
@@ -59,7 +56,10 @@ app
         })
     })
 
+app.listen(PORT, async (): Promise<void> => {
+    console.log(`> App listening on http://localhost:${PORT}`)
 
-/** listen */
-const port = process.env.PORT ?? 3000
-app.listen(port, () => console.log(`> App listening on port http://localhost:${port}`))
+
+    /** login client */
+    await client.login(TOKEN)
+})
