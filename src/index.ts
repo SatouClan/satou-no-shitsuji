@@ -1,3 +1,6 @@
+/** express app */
+import express from 'express'
+
 /** necessary discord.js classes */
 import { ActivityType, Client, GatewayIntentBits } from "discord.js"
 
@@ -41,3 +44,22 @@ client.once("ready", (instance): void => {
 
 /** login */
 client.login(TOKEN)
+
+
+/** start the application */
+const app = express()
+
+app
+    .route('/')
+    .all((req, res) => {
+        res.json({
+            name: "Satou no Shitsuji",
+            type: 'Bot',
+            status: 'Serving tea 🍵'
+        })
+    })
+
+
+/** listen */
+const port = process.env.PORT ?? 3000
+app.listen(port, () => console.log(`> App listening on port http://localhost:${port}`))
