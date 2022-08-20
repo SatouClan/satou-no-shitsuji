@@ -1,6 +1,7 @@
 import { Client, CommandInteraction } from 'discord.js'
 
-import messages from './../../constants/messages'
+import messages from 'constants/messages'
+import { randomColor } from 'utilities'
 
 
 const ping = {
@@ -16,7 +17,7 @@ const ping = {
         await interaction.followUp({
             embeds: [
                 {
-                    color: Math.random() * 65536,
+                    color: randomColor(),
                     title: `${messages.ping} - Latency: ${latency}ms - API Latency: ${apiLatency}ms`,
                 }
             ],

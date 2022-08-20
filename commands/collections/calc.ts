@@ -1,6 +1,8 @@
 import { CommandInteraction } from "discord.js"
 import { evaluate } from "mathjs"
 
+import { randomColor } from 'utilities'
+
 
 const calc = {
     name: 'calc',
@@ -11,7 +13,7 @@ const calc = {
 
         /** reply */
         const reply = {
-            color: Math.random() * 65536,
+            color: randomColor(),
             title: 'Do the math',
             author: {
                 name: `${interaction.user.username}#${interaction.user.discriminator}`,
