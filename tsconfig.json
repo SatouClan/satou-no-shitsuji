@@ -12,7 +12,7 @@
     "moduleResolution": "Node",
     "strict": true,
     "sourceMap": false,
-    "outDir": "dist",
+    "outDir": "api",
     "baseUrl": "src",
     "paths": {
       "@/*": [

@@ -2,10 +2,10 @@
   "name": "satou_no_shitsuji",
   "version": "1.0.0",
   "description": "I am Satou's butler.",
-  "main": "./dist/index.js",
+  "main": "./api/index.js",
   "scripts": {
-    "build": "rm -rf dist && tsc",
-    "start": "node -r dotenv/config ./dist/index.js",
+    "build": "rm -rf api && tsc",
+    "start": "node -r dotenv/config ./api/index.js",
     "dev": "nodemon"
   },
   "repository": {
@@ -15,7 +15,7 @@
   "author": "Fukumi",
   "license": "MIT",
   "_moduleAliases": {
-    "@": "dist"
+    "@": "api"
   },
   "bugs": {
     "url": "https://github.com/satoufukumi/satou_no_shitsuji/issues"
