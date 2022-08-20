@@ -11,7 +11,7 @@ import { TOKEN } from 'constants/config'
 import { run } from 'commands'
 
 
-type Data = {
+export type Data = {
     name: string
     type: string
     status: 'activated' | 'deactivated'
