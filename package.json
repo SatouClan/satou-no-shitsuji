@@ -2,10 +2,9 @@
   "name": "satou_no_shitsuji",
   "version": "1.0.0",
   "description": "I am Satou's butler.",
-  "main": "./api/index.js",
   "scripts": {
     "build": "rm -rf api && tsc",
-    "start": "node -r dotenv/config ./api/index.js",
+    "start": "node -r dotenv/config ./api/app.js",
     "dev": "nodemon"
   },
   "repository": {
