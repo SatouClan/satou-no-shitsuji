@@ -1,8 +1,11 @@
+/** express keep awake */
+import express from "express"
+
 /** necessary discord.js classes */
 import { ActivityType, Client, GatewayIntentBits } from "discord.js"
 
 /** environment variables */
-import { TOKEN } from "./constants/config"
+import { TOKEN, PORT } from "./constants/config"
 
 /** commands section */
 import { run } from "./commands"
@@ -27,9 +30,9 @@ client.once("ready", (instance): void => {
     )
 
     /** set activity for the client */
-    client.user?.setActivity(`Serving tea!`, {
+    client.user?.setActivity(`Serving tea 🍵`, {
         type: ActivityType.Playing,
-        name: "Serving tea!",
+        name: "Serving tea 🍵",
     })
 
     /** events to run when interaction is created */
@@ -38,3 +41,22 @@ client.once("ready", (instance): void => {
 
 /** login client */
 client.login(TOKEN)
+
+/** */
+/** create an instance of express app */
+const app = express()
+
+app.all("/", (req, res) => {
+    /** return response */
+    res.json({
+        name: "Satou no Shitsuji",
+        type: "Bot",
+        status: "activated",
+        doing: "Serving tea 🍵",
+    })
+})
+
+/** listen */
+app.listen(PORT, () =>
+    console.log(`> App listening on http://localhost:${PORT}`)
+)
