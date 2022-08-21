@@ -1,7 +1,7 @@
 import { Client, CommandInteraction } from 'discord.js'
 
-import messages from 'constants/messages'
-import { randomColor } from 'utilities'
+import messages from './../../constants/messages'
+import { randomColor } from './../../utilities'
 
 
 const ping = {

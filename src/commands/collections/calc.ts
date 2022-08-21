@@ -1,7 +1,7 @@
 import { CommandInteraction } from "discord.js"
 import { evaluate } from "mathjs"
 
-import { randomColor } from 'utilities'
+import { randomColor } from './../../utilities'
 
 
 const calc = {

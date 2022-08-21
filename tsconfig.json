@@ -1,42 +1,23 @@
 {
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
+    "module": "commonjs",
     "esModuleInterop": true,
-    "module": "esnext",
+    "target": "es6",
+    "noImplicitAny": true,
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "baseUrl": ".",
+    "strict": true,
+    "sourceMap": false,
+    "outDir": "dist",
+    "baseUrl": "src",
     "paths": {
-      "constant/*": [
-        "constant/*"
-      ],
-      "utilities/*": [
-        "utilities/*"
-      ],
-      "commands/*": [
-        "commands/*"
-      ]
+      "commands/*": ["commands/*"],
+      "utilities/*": ["utilities/*"],
+      "constants/*": ["constants/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }
