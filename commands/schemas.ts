@@ -13,7 +13,8 @@ const schemas: ApplicationCommandData[] = [
             {
                 name: 'math',
                 description: 'math claus to calculate',
-                type: ApplicationCommandOptionType.String
+                type: ApplicationCommandOptionType.String,
+                required: true
             }
         ]
     }
