@@ -1,4 +1,6 @@
 export const NAME: string = "Satou no Shitsuji"
+export const DISCRIMINATOR = 4685
+export const ICON_URL = ""
 
 export const TOKEN: string = process.env.TOKEN ?? ""
 export const CLIENT_ID: string = process.env.CLIENT_ID ?? ""

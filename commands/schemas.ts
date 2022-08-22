@@ -11,9 +11,21 @@ const schemas: ApplicationCommandData[] = [
         options: [
             {
                 name: "math",
-                description: "math clause to calculate",
+                description: "math clause to calculate 🖖",
                 type: ApplicationCommandOptionType.String,
                 required: true,
+            },
+        ],
+    },
+    {
+        name: "baserole",
+        description: "set base role for new members ✨",
+        options: [
+            {
+                required: true,
+                name: "role",
+                description: "base role",
+                type: ApplicationCommandOptionType.Role,
             },
         ],
     },

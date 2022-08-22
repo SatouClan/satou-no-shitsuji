@@ -7,16 +7,21 @@ import { ActivityType, Client, GatewayIntentBits } from "discord.js"
 /** environment variables */
 import { TOKEN, PORT } from "./constants/config"
 
-/** commands section */
-import { run } from "./commands"
+/** utilities */
+import init_commands from "./commands"
+import init_messages from "./messages"
+import init_reactions from "./reactions"
+import init_events from "./events"
 
 /** create a client instance */
 const client = new Client({
     intents: [
         GatewayIntentBits.DirectMessages,
+        GatewayIntentBits.DirectMessageReactions,
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMembers,
         GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.GuildMessageReactions,
         GatewayIntentBits.GuildVoiceStates,
         GatewayIntentBits.GuildIntegrations,
         GatewayIntentBits.MessageContent,
@@ -31,11 +36,13 @@ client.once("ready", (instance): void => {
     client.user?.setActivity({
         name: "Serving tea 🍵",
         type: ActivityType.Competing,
-        url: "https://i.imgflip.com/xaq3d.jpg",
     })
 
-    /** events to run when interaction is created */
-    run(client)
+    /** events */
+    init_commands(instance)
+    init_messages(instance)
+    init_reactions(instance)
+    init_events(instance)
 })
 
 /** login client */

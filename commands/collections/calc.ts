@@ -7,7 +7,7 @@ const calc = {
     name: "calc",
     execute: async function (interaction: CommandInteraction) {
         /** filter the options array */
-        const math: string = interaction.options.get("math")?.value as string
+        const math: string = interaction.options.get("math", true).value as string
 
         /** */
         const timestamp = libraries.prettyTime({
@@ -20,8 +20,8 @@ const calc = {
             title: "Playing math",
             author: {
                 name: `${interaction.user.username}#${interaction.user.discriminator}`,
-                icon_url: interaction.user.avatarURL() ?? '',
-                url: interaction.user.avatarURL() ?? '',
+                icon_url: interaction.user.avatarURL() ?? "",
+                url: interaction.user.avatarURL() ?? "",
             },
             description: `The result for \`${math}\` is : \`${evaluate(math)}\``,
             footer: {

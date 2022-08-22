@@ -1,11 +1,11 @@
 import { Client, CommandInteraction } from "discord.js"
 
-import { NAME } from "@constants/config"
+import { NAME, DISCRIMINATOR } from "@constants/config"
 import { libraries } from "@assets/ts/libraries"
 
 const ping = {
     name: "ping",
-    execute: async (client: Client<boolean>, interaction: CommandInteraction) => {
+    execute: async (client: Client<true>, interaction: CommandInteraction) => {
         const latency = Date.now() - interaction.createdTimestamp
         const apiLatency = Math.round(client.ws.ping)
         const timestamp = libraries.prettyTime({
@@ -19,9 +19,9 @@ const ping = {
                     color: libraries.randomColor(),
                     title: "Pong 🏓",
                     author: {
-                        name: NAME,
-                        icon_url: client.user?.avatarURL() ?? "",
-                        url: client.user?.avatarURL() ?? "",
+                        name: `${NAME}#${DISCRIMINATOR}`,
+                        icon_url: client.user.avatarURL() ?? "",
+                        url: client.user.avatarURL() ?? "",
                     },
                     description: [
                         `\`\`\`elm`,
