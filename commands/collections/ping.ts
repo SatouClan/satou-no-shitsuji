@@ -1,5 +1,6 @@
 import { Client, CommandInteraction } from "discord.js"
 
+import { NAME } from "@constants/config"
 import { libraries } from "@assets/ts/libraries"
 
 const ping = {
@@ -8,7 +9,7 @@ const ping = {
         const latency = Date.now() - interaction.createdTimestamp
         const apiLatency = Math.round(client.ws.ping)
         const timestamp = libraries.prettyTime({
-            time: new Date(interaction.createdTimestamp),
+            timestamp: new Date(interaction.createdTimestamp),
         })
 
         await interaction.deferReply()
@@ -16,8 +17,21 @@ const ping = {
             embeds: [
                 {
                     color: libraries.randomColor(),
-                    title: `🏓Latency is ${latency}ms. API Latency is ${apiLatency}ms.`,
-                    description: `Create at \`${timestamp}\``,
+                    title: "Pong 🏓",
+                    author: {
+                        name: NAME,
+                        icon_url: client.user?.avatarURL() ?? "",
+                        url: client.user?.avatarURL() ?? "",
+                    },
+                    description: [
+                        `\`\`\`elm`,
+                        `Latency     : ${latency}ms`,
+                        `API Latency : ${apiLatency}ms`,
+                        `\`\`\``,
+                    ].join("\n"),
+                    footer: {
+                        text: `Created at ${timestamp}`,
+                    },
                 },
             ],
             ephemeral: false,

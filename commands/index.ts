@@ -1,8 +1,4 @@
-import {
-    CacheType,
-    Client,
-    Interaction,
-} from "discord.js" /** discord classes */
+import { CacheType, Client, Interaction } from "discord.js" /** discord classes */
 
 /** messages */
 import EXPRESSION_MAP from "./messages/expression"
@@ -19,29 +15,26 @@ export function run(client: Client<boolean>): void {
     deploy() /** register commands */
 
     /** on interaction */
-    client.on(
-        "interactionCreate",
-        async function (interaction: Interaction<CacheType>) {
-            if (!interaction.isCommand()) return
+    client.on("interactionCreate", async function (interaction: Interaction<CacheType>) {
+        if (!interaction.isCommand()) return
 
-            try {
-                switch (interaction.commandName) {
-                    case ping.name:
-                        await ping.execute(client, interaction)
-                        break
+        try {
+            switch (interaction.commandName) {
+                case ping.name:
+                    await ping.execute(client, interaction)
+                    break
 
-                    case calc.name:
-                        await calc.execute(interaction)
-                        break
+                case calc.name:
+                    await calc.execute(interaction)
+                    break
 
-                    default:
-                        break
-                }
-            } catch (e) {
-                await interaction.reply("error")
+                default:
+                    break
             }
+        } catch (e) {
+            await interaction.reply("error")
         }
-    )
+    })
 
     /** on message */
     client.on("messageCreate", async function (message) {
@@ -58,8 +51,10 @@ export function run(client: Client<boolean>): void {
                 await message.channel.send("See you.")
 
             for (const exp in EXPRESSION_MAP)
-                if (content.toLowerCase().includes(exp))
+                if (content.toLowerCase().includes(exp)) {
                     await message.channel.send(EXPRESSION_MAP[exp])
+                    break
+                }
         }
 
         /** on mention */
