@@ -1,6 +1,8 @@
 import { Client, CommandInteraction } from "discord.js"
 
 import dym from "@constants/dym"
+import { libraries } from "@assets/ts/libraries"
+import { createTimestamp, newDate } from "@constants/config"
 
 export default {
     name: "baserole",
@@ -32,7 +34,10 @@ export default {
                     },
                     description: `Set the base role to <@&${
                         dym.baseRoleId[interaction.guildId]
-                    }>`,
+                        }>`,
+                    footer: {
+                        text: `Created at ${createTimestamp(interaction)}`,
+                    }
                 },
             ],
             ephemeral: true,

@@ -2,17 +2,13 @@ import { APIEmbed, CommandInteraction, JSONEncodable } from "discord.js"
 import { evaluate } from "mathjs"
 
 import { libraries } from "@assets/ts/libraries"
+import { createTimestamp } from "@constants/config"
 
 const calc = {
     name: "calc",
     execute: async function (interaction: CommandInteraction) {
         /** filter the options array */
         const math: string = interaction.options.get("math", true).value as string
-
-        /** */
-        const timestamp = libraries.prettyTime({
-            timestamp: new Date(interaction.createdTimestamp),
-        })
 
         /** reply */
         const reply: APIEmbed | JSONEncodable<APIEmbed> = {
@@ -25,7 +21,7 @@ const calc = {
             },
             description: `The result for \`${math}\` is : \`${evaluate(math)}\``,
             footer: {
-                text: `Created at ${timestamp}`,
+                text: `Created at ${createTimestamp(interaction)}`,
             },
         }
 
