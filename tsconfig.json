@@ -1,23 +1,22 @@
 {
-  "ts-node": {
-    "require": ["tsconfig-paths/register"]
-  },
-  "compilerOptions": {
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "target": "es6",
-    "noImplicitAny": true,
-    "moduleResolution": "node",
-    "strict": true,
-    "sourceMap": false,
-    "outDir": "dist",
-    "baseUrl": "src",
-    "paths": {
-      "commands/*": ["commands/*"],
-      "utilities/*": ["utilities/*"],
-      "constants/*": ["constants/*"]
-    }
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+    "ts-node": {
+        "transpileOnly": true,
+        "require": ["tsconfig-paths/register", "dotenv/config"]
+    },
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "target": "es6",
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "strict": true,
+        "sourceMap": false,
+        "baseUrl": ".",
+        "paths": {
+            "@assets/*": ["assets/*"],
+            "@commands/*": ["commands/*"],
+            "@constants/*": ["constants/*"],
+            "@utilities/*": ["utilities/*"]
+        }
+    },
+    "exclude": ["node_modules"]
 }

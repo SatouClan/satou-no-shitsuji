@@ -25,14 +25,13 @@ const client = new Client({
 
 /** run when ready */
 client.once("ready", (instance): void => {
-    console.log(
-        `> Logged in as ${instance.user.username}#${instance.user.discriminator}`
-    )
+    console.log(`> Logged in as ${instance.user.username}#${instance.user.discriminator}`)
 
     /** set activity for the client */
-    client.user?.setActivity(`Serving tea 🍵`, {
-        type: ActivityType.Playing,
+    client.user?.setActivity({
         name: "Serving tea 🍵",
+        type: ActivityType.Competing,
+        url: "https://i.imgflip.com/xaq3d.jpg",
     })
 
     /** events to run when interaction is created */
@@ -57,6 +56,4 @@ app.all("/", (req, res) => {
 })
 
 /** listen */
-app.listen(PORT, () =>
-    console.log(`> App listening on http://localhost:${PORT}`)
-)
+app.listen(PORT, () => console.log(`> App listening on http://localhost:${PORT}`))

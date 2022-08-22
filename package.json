@@ -1,11 +1,9 @@
 {
     "name": "satou_no_shitsuji",
     "version": "1.0.0",
-    "description": "I am Satou's butler.",
-    "main": "./dist/index.js",
+    "description": "I am the Satou's butler.",
     "scripts": {
-        "build": "rm -rf dist && tsc",
-        "start": "node -r dotenv/config ./dist/index.js",
+        "start": "ts-node index.ts",
         "dev": "nodemon"
     },
     "repository": {
