@@ -17,6 +17,7 @@ export default {
         const baseRoleId = interaction.options.get("role", true).value as string
         const baseRole = await interaction.guild.roles.fetch(baseRoleId)
         const memberRole = interaction.member.roles as GuildMemberRoleManager
+        const clientRole = (await interaction.guild.members.fetch(client.user.id)).roles
 
         if (baseRole === null)
             return this.error(interaction, `Base role doesn't exist 🤔`)
@@ -27,8 +28,10 @@ export default {
                 `You can't set base role with a role that is higher than you or too high 😿`
             )
 
-        dym.baseRoleId[interaction.guildId ?? ""] = baseRoleId
+        if (clientRole.highest.position <= baseRole.position)
+            return this.error(interaction, `Base role is too high for me to set 😿`)
 
+        dym.baseRoleId[interaction.guildId ?? ""] = baseRoleId
         return this.accepted(client, interaction)
     },
 
@@ -36,7 +39,7 @@ export default {
         return interaction.reply({ content, ephemeral: true })
     },
 
-   async  refused (interaction: CommandInteraction) {
+    async refused(interaction: CommandInteraction) {
         return interaction.reply({
             content: "Heheh, you can not do that 😅",
             ephemeral: true,
