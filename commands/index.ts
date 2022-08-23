@@ -35,7 +35,10 @@ export default function init_commands(client: Client<true>): void {
                     break
             }
         } catch (e) {
-            await interaction.reply("Oops, an error occurred 🤔")
+            await interaction.reply({
+                content: "Oops, an error occurred 🤔",
+                ephemeral: true,
+            })
         }
     })
 }

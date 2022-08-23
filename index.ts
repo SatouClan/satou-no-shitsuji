@@ -45,14 +45,11 @@ client.once("ready", (instance): void => {
     init_events(instance)
 })
 
-/** login client */
-client.login(TOKEN)
-
 /** */
 /** create an instance of express app */
 const app = express()
 
-app.all("/", (req, res) => {
+app.all("/", (_, res) => {
     /** return response */
     res.json({
         name: "Satou no Shitsuji",
@@ -62,5 +59,9 @@ app.all("/", (req, res) => {
     })
 })
 
-/** listen */
-app.listen(PORT, () => console.log(`> App listening on http://localhost:${PORT}`))
+/** login client then start the server */
+client
+    .login(TOKEN)
+    .then(() =>
+        app.listen(PORT, () => console.log(`> App listening on http://localhost:${PORT}`))
+    )
