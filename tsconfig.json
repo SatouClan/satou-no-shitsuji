@@ -5,16 +5,20 @@
     },
     "compilerOptions": {
         "esModuleInterop": true,
-        "target": "es6",
+        "target": "ES6",
+        "module": "commonjs",
         "noImplicitAny": true,
         "moduleResolution": "node",
         "strict": true,
         "sourceMap": false,
         "baseUrl": ".",
         "paths": {
+            "@events": ["events"],
+            "@events/*": ["events/*"],
             "@assets/*": ["assets/*"],
-            "@commands/*": ["commands/*"],
+            "@commands/*": ["events/commands/*"],
             "@constants/*": ["constants/*"],
+            "@utilities": ["utilities"],
             "@utilities/*": ["utilities/*"]
         }
     },

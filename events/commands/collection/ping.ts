@@ -2,6 +2,7 @@ import { Client, CommandInteraction } from "discord.js"
 
 import { NAME, DISCRIMINATOR, createTimestamp } from "@constants/config"
 import { libraries } from "@assets/ts/libraries"
+import { SlashCommand } from "../data"
 
 const ping = {
     name: "ping",
@@ -34,6 +35,6 @@ const ping = {
             ephemeral: false,
         })
     },
-}
+} as SlashCommand
 
 export default ping

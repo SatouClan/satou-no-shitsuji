@@ -1,12 +1,13 @@
-import { APIEmbed, CommandInteraction, JSONEncodable } from "discord.js"
+import { APIEmbed, CommandInteraction, JSONEncodable ,Client} from "discord.js"
 import { evaluate } from "mathjs"
 
 import { libraries } from "@assets/ts/libraries"
 import { createTimestamp } from "@constants/config"
+import { SlashCommand } from "../data"
 
 const calc = {
     name: "calc",
-    execute: async function (interaction: CommandInteraction) {
+    execute: async function (client: Client<true>, interaction: CommandInteraction) {
         /** filter the options array */
         const math: string = interaction.options.get("math", true).value as string
 
@@ -28,6 +29,6 @@ const calc = {
         await interaction.deferReply()
         await interaction.followUp({ embeds: [reply] })
     },
-}
+} as SlashCommand
 
 export default calc

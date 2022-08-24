@@ -1,17 +1,26 @@
-/** express keep awake */
+/** third party */
 import express from "express"
-
-/** necessary discord.js classes */
 import { ActivityType, Client, GatewayIntentBits } from "discord.js"
 
 /** environment variables */
-import { TOKEN, PORT } from "./constants/config"
+import { TOKEN, PORT } from "@constants/config"
 
 /** utilities */
-import init_commands from "./commands"
-import init_messages from "./messages"
-import init_reactions from "./reactions"
-import init_events from "./events"
+import init_events from "@events"
+
+/** */
+/** create an instance of express app */
+const app = express()
+
+app.all("/", (_, res) => {
+    /** return response */
+    res.json({
+        name: "Satou no Shitsuji",
+        type: "Bot",
+        status: "activated",
+        doing: "Serving tea 🍵",
+    })
+})
 
 /** create a client instance */
 const client = new Client({
@@ -29,34 +38,17 @@ const client = new Client({
 })
 
 /** run when ready */
-client.once("ready", (instance): void => {
-    console.log(`> Logged in as ${instance.user.username}#${instance.user.discriminator}`)
+client.once("ready", async (instance): Promise<void> => {
+    console.log(`> Logged in as ${instance.user.tag}`)
 
     /** set activity for the client */
-    client.user?.setActivity({
+    instance.user.setActivity({
         name: "Serving tea 🍵",
         type: ActivityType.Competing,
     })
 
     /** events */
-    init_commands(instance)
-    init_messages(instance)
-    init_reactions(instance)
-    init_events(instance)
-})
-
-/** */
-/** create an instance of express app */
-const app = express()
-
-app.all("/", (_, res) => {
-    /** return response */
-    res.json({
-        name: "Satou no Shitsuji",
-        type: "Bot",
-        status: "activated",
-        doing: "Serving tea 🍵",
-    })
+    await init_events(instance)
 })
 
 /** login client then start the server */

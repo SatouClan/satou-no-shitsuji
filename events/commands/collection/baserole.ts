@@ -2,11 +2,12 @@ import { Client, CommandInteraction, GuildMemberRoleManager } from "discord.js"
 
 import dym from "@constants/dym"
 import { createTimestamp } from "@constants/config"
+import { SlashCommand } from "../data"
 
 export default {
     name: "baserole",
 
-    async execute(client: Client<true>, interaction: CommandInteraction) {
+    async execute(client: Client<true>, interaction: CommandInteraction<"cached">) {
         if (
             !interaction.member ||
             !interaction.memberPermissions?.has("ManageRoles") ||
@@ -14,9 +15,9 @@ export default {
         )
             return this.refused(interaction)
 
-        const baseRoleId = interaction.options.get("role", true).value as string
-        const baseRole = await interaction.guild.roles.fetch(baseRoleId)
-        const memberRole = interaction.member.roles as GuildMemberRoleManager
+        const baseroleId = interaction.options.get("role", true).value as string
+        const baseRole = await interaction.guild.roles.fetch(baseroleId)
+        const memberRole = interaction.member.roles
         const clientRole = (await interaction.guild.members.fetch(client.user.id)).roles
 
         if (baseRole === null)
@@ -31,7 +32,13 @@ export default {
         if (clientRole.highest.position <= baseRole.position)
             return this.error(interaction, `Base role is too high for me to set 😿`)
 
-        dym.baseRoleId[interaction.guildId ?? ""] = baseRoleId
+        let target: "user" | "bot" = interaction.options.data.every(
+            (o) => o.name === "user"
+        )
+            ? "user"
+            : "bot"
+        dym[`${target}BaseroleId`][interaction.guildId ?? ""] = baseroleId
+
         return this.accepted(client, interaction)
     },
 
@@ -47,6 +54,13 @@ export default {
     },
 
     async accepted(client: Client<true>, interaction: CommandInteraction) {
+        let target: "user" | "bot" = interaction.options.data.every(
+            (o) => o.name === "user"
+        )
+            ? "user"
+            : "bot"
+        let roleId = dym[`${target}BaseroleId`][interaction.guildId ?? ""]
+
         return interaction.reply({
             embeds: [
                 {
@@ -54,9 +68,7 @@ export default {
                         name: `${client.user.username}#${client.user.discriminator}`,
                         icon_url: client.user.avatarURL() ?? "",
                     },
-                    description: `Set the base role to <@&${
-                        dym.baseRoleId[interaction.guildId ?? ""]
-                    }>`,
+                    description: `Set the ${target}'s base role to <@&${roleId}>`,
                     footer: {
                         text: `Created at ${createTimestamp(interaction)}`,
                     },
@@ -65,4 +77,4 @@ export default {
             ephemeral: true,
         })
     },
-}
+} as SlashCommand
