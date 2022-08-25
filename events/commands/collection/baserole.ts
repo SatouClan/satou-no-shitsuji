@@ -1,10 +1,13 @@
 import { ChatInputCommandInteraction, Client } from "discord.js"
 
 import dym from "@constants/dym"
-import { createTimestamp } from "@constants/config"
+import { createTimestamp } from "@constants/utilities"
 import { Command } from "../data"
 
-async function error(interaction: ChatInputCommandInteraction, content: string) {
+async function error(
+    interaction: ChatInputCommandInteraction,
+    content: string
+) {
     return interaction.reply({ content, ephemeral: true })
 }
 
@@ -15,7 +18,10 @@ async function refused(interaction: ChatInputCommandInteraction) {
     })
 }
 
-async function accepted(client: Client<true>, interaction: ChatInputCommandInteraction) {
+async function accepted(
+    client: Client<true>,
+    interaction: ChatInputCommandInteraction
+) {
     let target: "user" | "bot" =
         interaction.options.getSubcommand(true) === "user" ? "user" : "bot"
     let roleId = dym[`${target}BaseroleId`][interaction.guildId ?? ""]
@@ -54,9 +60,12 @@ export default {
         const baseroleId = interaction.options.get("role", true).value as string
         const baseRole = await interaction.guild.roles.fetch(baseroleId)
         const memberRole = interaction.member.roles
-        const clientRole = (await interaction.guild.members.fetch(client.user.id)).roles
+        const clientRole = (
+            await interaction.guild.members.fetch(client.user.id)
+        ).roles
 
-        if (baseRole === null) return error(interaction, `Base role doesn't exist 🤔`)
+        if (baseRole === null)
+            return error(interaction, `Base role doesn't exist 🤔`)
 
         if (memberRole.highest.position < baseRole.position)
             return error(

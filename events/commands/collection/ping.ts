@@ -7,11 +7,14 @@ import {
     Client,
 } from "discord.js"
 
-import { createTimestamp } from "@constants/config"
+import { createTimestamp } from "@constants/utilities"
 import { libraries } from "@assets/ts/libraries"
 import { Command } from "../data"
 
-async function isButtonHandler(client: Client<true>, interaction: ButtonInteraction) {
+async function isButtonHandler(
+    client: Client<true>,
+    interaction: ButtonInteraction
+) {
     const latency = Date.now() - interaction.createdTimestamp
     const apiLatency = Math.round(client.ws.ping)
 
@@ -42,7 +45,9 @@ async function isButtonHandler(client: Client<true>, interaction: ButtonInteract
     })
 }
 
-async function isChatInputCommandHandler(interaction: ChatInputCommandInteraction) {
+async function isChatInputCommandHandler(
+    interaction: ChatInputCommandInteraction
+) {
     await interaction.reply({
         components: [
             new ActionRowBuilder<ButtonBuilder>().addComponents(

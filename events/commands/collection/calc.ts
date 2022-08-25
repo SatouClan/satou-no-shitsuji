@@ -1,8 +1,13 @@
-import { APIEmbed, JSONEncodable, Client, ChatInputCommandInteraction } from "discord.js"
+import {
+    APIEmbed,
+    JSONEncodable,
+    Client,
+    ChatInputCommandInteraction,
+} from "discord.js"
 import { evaluate } from "mathjs"
 
 import { libraries } from "@assets/ts/libraries"
-import { createTimestamp } from "@constants/config"
+import { createTimestamp } from "@constants/utilities"
 import { Command } from "../data"
 
 const calc = {
@@ -12,7 +17,8 @@ const calc = {
         interaction: ChatInputCommandInteraction
     ) {
         /** filter the options array */
-        const math: string = interaction.options.get("math", true).value as string
+        const math: string = interaction.options.get("math", true)
+            .value as string
 
         /** reply */
         const reply: APIEmbed | JSONEncodable<APIEmbed> = {
@@ -23,7 +29,9 @@ const calc = {
                 icon_url: interaction.user.avatarURL() ?? "",
                 url: interaction.user.avatarURL() ?? "",
             },
-            description: `The result for \`${math}\` is : \`${evaluate(math)}\``,
+            description: `The result for \`${math}\` is : \`${evaluate(
+                math
+            )}\``,
             footer: {
                 text: `Created at ${createTimestamp(interaction)}`,
             },
