@@ -1,18 +1,21 @@
 import {
     ApplicationCommandData,
     ApplicationCommandOptionType,
+    ApplicationCommandType,
     Client,
-    CommandInteraction,
+    Interaction,
 } from "discord.js"
 
 export const list: ApplicationCommandData[] = [
     {
         name: "ping",
+        type: ApplicationCommandType.ChatInput,
         description: "health check 🏓",
     },
     {
         name: "calc",
         description: "calculate the following math clause",
+        type: ApplicationCommandType.ChatInput,
         options: [
             {
                 name: "math",
@@ -25,6 +28,7 @@ export const list: ApplicationCommandData[] = [
     {
         name: "baserole",
         description: "set baserole for new members ✨",
+        type: ApplicationCommandType.ChatInput,
         options: [
             {
                 name: "bot",
@@ -56,8 +60,7 @@ export const list: ApplicationCommandData[] = [
     },
 ]
 
-export interface SlashCommand {
+export interface Command {
     name: string
-    execute: (client: Client<true>, interaction: CommandInteraction) => any
-    [key: string]: any
+    execute: (client: Client<true>, interaction: Interaction) => any
 }

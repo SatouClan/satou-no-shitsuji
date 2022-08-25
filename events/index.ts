@@ -4,13 +4,10 @@ import path from "path"
 
 import register from "./commands/register"
 
-export interface ClientEvent {
+export interface ClientEvent<K extends keyof ClientEvents> {
     once?: boolean
-    name: keyof ClientEvents
-    execute: (
-        client: Client<true>,
-        ...args: ClientEvents[this["name"]]
-    ) => Awaitable<void>
+    name: K
+    execute: (client: Client<true>, ...args: ClientEvents[K]) => Awaitable<void>
     [key: string]: any
 }
 
@@ -24,7 +21,7 @@ export default async function init_events(client: Client<true>) {
 
     for (const file of eventFiles) {
         const filePath = path.join(eventPath, file.slice(0, -3))
-        const event: ClientEvent = (await import(filePath)).default
+        const event: ClientEvent<keyof ClientEvents> = (await import(filePath)).default
 
         client[event.once ? "once" : "on"](
             event.name,

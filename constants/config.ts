@@ -1,4 +1,4 @@
-import { CommandInteraction } from "discord.js"
+import { Interaction } from "discord.js"
 
 import { libraries } from "@assets/ts/libraries"
 
@@ -21,5 +21,5 @@ export const newDate = (date: Date = new Date()) => {
     return new Date(date.toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }))
 }
 
-export const createTimestamp = ({ createdTimestamp }: CommandInteraction) =>
+export const createTimestamp = ({ createdTimestamp }: Interaction) =>
     libraries.prettyTime({ timestamp: newDate(new Date(createdTimestamp)) })

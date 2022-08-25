@@ -1,31 +1,42 @@
-import { CacheType, Interaction } from "discord.js"
+import { Interaction } from "discord.js"
 
 import { ClientEvent } from "@events"
-import { SlashCommand, list } from "./commands/data"
+import { Command, list } from "./commands/data"
 import { join } from "path"
 
 const commands = list.map(async (item) => {
     const commandPath = join(__dirname, "commands", "collection")
 
-    return (await import(join(commandPath, item.name))).default as Promise<SlashCommand>
+    return (await import(join(commandPath, item.name))).default as Promise<Command>
 })
 
 export default {
     name: "interactionCreate",
-    execute(client, interaction: Interaction<CacheType>) {
-        if (!interaction.isCommand()) return
-
+    async execute(client, interaction: Interaction) {
         try {
             commands.forEach(async (cmd) => {
                 const command = await cmd
-                if (command.name !== interaction.commandName) return
-                command.execute(client, interaction)
+
+                if (
+                    interaction.isSelectMenu() ||
+                    interaction.isButton() ||
+                    interaction.isModalSubmit()
+                ) {
+                    if (command.name !== interaction.message?.interaction?.commandName)
+                        return
+                    return command.execute(client, interaction)
+                }
+
+                if (interaction.commandName === command.name)
+                    return command.execute(client, interaction)
             })
         } catch (e) {
-            interaction.reply({
+            if (interaction.isAutocomplete()) return
+
+            await interaction.reply({
                 content: "Oops, an error occurred 🤔",
                 ephemeral: true,
             })
         }
     },
-} as ClientEvent
+} as ClientEvent<"interactionCreate">

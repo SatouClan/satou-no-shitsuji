@@ -7,7 +7,7 @@ import { ClientEvent } from "@events"
 export default {
     name: "messageCreate",
 
-    async execute(client, message: Message<boolean>) {
+    async execute(client, message) {
         if (message.author.id === client.user.id) return
 
         /** */
@@ -32,4 +32,4 @@ export default {
                 break
             }
     },
-} as ClientEvent
+} as ClientEvent<"messageCreate">

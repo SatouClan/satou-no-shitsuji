@@ -10,4 +10,4 @@ export default {
         let goodbyeMsg = dym.goodbyeMsgTemplate.replace("$MENTION$", `<@${id}>`)
         await member.guild.systemChannel?.send(goodbyeMsg)
     },
-} as ClientEvent
+} as ClientEvent<"guildMemberRemove">
