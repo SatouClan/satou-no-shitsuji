@@ -5,7 +5,6 @@ import {
     ButtonStyle,
     ChatInputCommandInteraction,
     Client,
-    ComponentType,
 } from "discord.js"
 
 import { createTimestamp } from "@constants/config"
