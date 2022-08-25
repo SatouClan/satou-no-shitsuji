@@ -19,7 +19,8 @@
             "@commands/*": ["events/commands/*"],
             "@constants/*": ["constants/*"],
             "@utilities": ["utilities"],
-            "@utilities/*": ["utilities/*"]
+            "@utilities/*": ["utilities/*"],
+            "@images/*": ["images/*"]
         }
     },
     "exclude": ["node_modules"]

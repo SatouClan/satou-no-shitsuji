@@ -16,9 +16,8 @@ async function refused(interaction: ChatInputCommandInteraction) {
 }
 
 async function accepted(client: Client<true>, interaction: ChatInputCommandInteraction) {
-    let target: "user" | "bot" = interaction.options.data.every((o) => o.name === "user")
-        ? "user"
-        : "bot"
+    let target: "user" | "bot" =
+        interaction.options.getSubcommand(true) === "user" ? "user" : "bot"
     let roleId = dym[`${target}BaseroleId`][interaction.guildId ?? ""]
 
     return interaction.reply({
@@ -68,11 +67,8 @@ export default {
         if (clientRole.highest.position <= baseRole.position)
             return error(interaction, `Base role is too high for me to set 😿`)
 
-        let target: "user" | "bot" = interaction.options.data.every(
-            (o) => o.name === "user"
-        )
-            ? "user"
-            : "bot"
+        let target: "user" | "bot" =
+            interaction.options.getSubcommand(true) === "user" ? "user" : "bot"
         dym[`${target}BaseroleId`][interaction.guildId ?? ""] = baseroleId
 
         return accepted(client, interaction)
