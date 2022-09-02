@@ -1,6 +1,6 @@
 /** third party */
 import express from "express"
-import { ActivityType, Client, GatewayIntentBits } from "discord.js"
+import { ActivityType, Client, GatewayIntentBits, Partials } from "discord.js"
 
 /** environment variables */
 import { TOKEN, PORT } from "@constants/config"
@@ -25,15 +25,32 @@ app.all("/", (_, res) => {
 /** create a client instance */
 const client = new Client({
     intents: [
-        GatewayIntentBits.DirectMessages,
-        GatewayIntentBits.DirectMessageReactions,
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildBans,
+        GatewayIntentBits.GuildEmojisAndStickers,
+        GatewayIntentBits.GuildIntegrations,
+        GatewayIntentBits.GuildWebhooks,
+        GatewayIntentBits.GuildInvites,
+        GatewayIntentBits.GuildVoiceStates,
+        GatewayIntentBits.GuildPresences,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.GuildMessageReactions,
-        GatewayIntentBits.GuildVoiceStates,
-        GatewayIntentBits.GuildIntegrations,
+        GatewayIntentBits.GuildMessageTyping,
+        GatewayIntentBits.DirectMessages,
+        GatewayIntentBits.DirectMessageReactions,
+        GatewayIntentBits.DirectMessageTyping,
         GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildScheduledEvents,
+    ],
+    partials: [
+        Partials.User,
+        Partials.Channel,
+        Partials.GuildMember,
+        Partials.Message,
+        Partials.Reaction,
+        Partials.GuildScheduledEvent,
+        Partials.ThreadMember,
     ],
 })
 
@@ -57,3 +74,4 @@ client
     .then(() =>
         app.listen(PORT, () => console.log(`> App listening on http://localhost:${PORT}`))
     )
+    .catch(console.error)

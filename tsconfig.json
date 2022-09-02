@@ -7,20 +7,15 @@
         "esModuleInterop": true,
         "target": "ES6",
         "module": "commonjs",
+        "lib": ["ES2015.Iterable", "es2022", "ES2018.AsyncIterable"],
         "noImplicitAny": true,
         "moduleResolution": "node",
         "strict": true,
         "sourceMap": false,
         "baseUrl": ".",
         "paths": {
-            "@events": ["events"],
-            "@events/*": ["events/*"],
-            "@assets/*": ["assets/*"],
-            "@commands/*": ["events/commands/*"],
-            "@constants/*": ["constants/*"],
-            "@utilities": ["utilities"],
-            "@utilities/*": ["utilities/*"],
-            "@images/*": ["images/*"]
+            "@": ["./"],
+            "@*": ["./*"]
         }
     },
     "exclude": ["node_modules"]
